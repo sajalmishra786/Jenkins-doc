@@ -42,3 +42,86 @@ This guide walks you through setting up Jenkins on an AWS EC2 instance, from sel
 
 ```bash
 ssh -i /path/to/your-key.pem ubuntu@<EC2-Public-IP>
+```
+
+---
+
+## 3. Install Jenkins
+
+1. **Update the System:**
+   
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+2. **Add Jenkins Repository:**
+   
+```bash
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee "/usr/share/keyrings/jenkins.asc" > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+```
+
+3. **Install Jenkins:**
+   
+```bash
+sudo apt update
+sudo apt install jenkins -y
+```
+
+4. **Start Jenkins Service:**
+
+```bash
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+```
+
+**Check Jenkins Status:**
+
+```bash
+sudo systemctl status jenkins
+```
+This verifies whether Jenkins is running.
+
+---
+
+## 4. Secure Jenkins
+
+1. **Access Jenkins Interface:**
+   - Open your browser and navigate to http://<EC2-Public-IP>:8080.
+2. **Unlock Jenkins:**
+   - Retrieve the initial admin password:
+     
+```bash
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+
+3. **Set Up Admin User:**
+   - Follow the on-screen instructions to create an admin user with a strong password.
+4. **Configure Security:**
+   - Go to "Manage Jenkins > Configure Global Security."
+   - Enable Role-Based Authorization and set roles and permissions.
+5. **Install Plugins:**
+   - During setup, install recommended plugins for Jenkins functionality.
+
+---
+
+## 5. Test and Verify
+
+1. **Verify Jenkins Access:**
+   - Log in to the Jenkins web interface using the admin credentials you set up.
+2. **Run a Test Job:**
+   - Create and execute a simple freestyle project.
+3. **Confirm Functionality:**
+   - Ensure Jenkins can execute jobs and the plugins are functioning correctly.
+
+**Test Connectivity:**
+
+```bash
+curl -I http://<EC2-Public-IP>:8080
+```
+This checks whether Jenkins is accessible at the specified URL.
+
+---
+
+## Conclusion
+This guide simplifies the process of setting up Jenkins on an AWS EC2 instance. By following these steps, you’ll have a fully functional and secure Jenkins environment to support your CI/CD workflows.
