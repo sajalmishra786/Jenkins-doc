@@ -29,11 +29,11 @@ This guide walks you through setting up Jenkins on an AWS EC2 instance, from sel
 ## 2. Configure Security Groups
 
 1. **Create a Security Group:**
-   - Go to the EC2 dashboard and select "Security Groups."
+   - Go to the **EC2 dashboard** and select **Security Groups**.
    - Create a new security group, e.g., `Jenkins-SG`.
 2. **Set Inbound Rules:**
    - Allow traffic on **port 8080** from your IP address or CIDR to access Jenkins.
-   - Optionally, allow SSH (port 22) for remote access.
+   - Optionally, allow **SSH (port 22)** for remote access.
 3. **Set Outbound Rules:**
    - Permit all outbound traffic or restrict it as needed.
 4. **Associate Security Group:**
@@ -88,7 +88,7 @@ This verifies whether Jenkins is running.
 ## 4. Secure Jenkins
 
 1. **Access Jenkins Interface:**
-   - Open your browser and navigate to http://<EC2-Public-IP>:8080.
+   - Open your browser and navigate to `http://<EC2-Public-IP>:8080`.
 2. **Unlock Jenkins:**
    - Retrieve the initial admin password:
      
@@ -99,7 +99,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 3. **Set Up Admin User:**
    - Follow the on-screen instructions to create an admin user with a strong password.
 4. **Configure Security:**
-   - Go to "Manage Jenkins > Configure Global Security."
+   - Go to **`Manage Jenkins > Configure Global Security`**.
    - Enable Role-Based Authorization and set roles and permissions.
 5. **Install Plugins:**
    - During setup, install recommended plugins for Jenkins functionality.
